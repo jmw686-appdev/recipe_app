@@ -6,6 +6,7 @@
   Edit recipe
 </a>
 
+<%= link_to 'Add Ingredient', ingredients_new_path %>
 <hr>
 
 <dl>
@@ -17,10 +18,26 @@
   </dd>
 
   <dt>
-    Created at
+    Ingredients
   </dt>
   <dd>
-    <%= time_ago_in_words(@recipe.created_at) %> ago
+    <% Ingredient.where(recipe_id: @recipe.id).each do |ingr| %>
+      <div>
+
+         <%= ingr.name %>
+         <br>
+         <%= ingr.amount %> - <%= ingr.units %>
+         <br>
+      </div>
+      <hr>
+    <% end %>
+  </dd>
+
+  <dt>
+    Created by
+  </dt>
+  <dd>
+    <%= link_to @recipe.user.username, user_path(@recipe.user) %>
   </dd>
 
   <dt>
@@ -30,7 +47,7 @@
     <%= time_ago_in_words(@recipe.updated_at) %> ago
   </dd>
 </dl>
-
+<%= render 'shared/quick_add_ingredient' %>
 <a href="/delete_recipe/<%= @recipe.id %>">
   Delete recipe
 </a>
