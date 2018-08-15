@@ -11,9 +11,6 @@ class IngredientsController < ApplicationController
     render("ingredients/show.html.erb")
   end
 
-  def new_form
-    render("ingredients/new_form.html.erb")
-  end
 
   def create_row
     @ingredient = Ingredient.new

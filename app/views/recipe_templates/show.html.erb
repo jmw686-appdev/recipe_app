@@ -23,10 +23,12 @@
   <dd>
     <% Ingredient.where(recipe_id: @recipe.id).each do |ingr| %>
       <div>
-
+    
          <%= ingr.name %>
          <br>
          <%= ingr.amount %> - <%= ingr.units %>
+         <br>
+         <%= link_to "Edit #{ingr.name}", edit_ingredient_path(ingr) %>
          <br>
       </div>
       <hr>

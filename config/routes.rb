@@ -26,7 +26,8 @@ Rails.application.routes.draw do
   get("/ingredients/:id_to_display", { :controller => "ingredients", :action => "show" })
 
   # UPDATE
-  get("/ingredients/:prefill_with_id/edit", { :controller => "ingredients", :action => "edit_form" })
+  get("/ingredients/:prefill_with_id/edit", { :controller => "ingredients",
+      :action => "edit_form", :as => 'edit_ingredient' })
   post("/update_ingredient/:id_to_modify", { :controller => "ingredients", :action => "update_row" })
 
   # DELETE

@@ -1,0 +1,33 @@
+<form action="/update_ingredient/<%= @ingredient.id %>" method="post">
+
+  <h3>Ingredient</h3>
+  <!-- Label and input for name -->
+  <div class="form-group">
+    <label for="name">
+      Ingredient Name
+    </label>
+
+    <input type="text" id="name" name="name" class="form-control" value="<%= @ingredient.name %>" >
+  </div>
+  <!-- Label and input for name -->
+  <div class="form-group">
+    <label for="amount">
+      Amount
+    </label>
+
+    <input type="text" id="amount" name="amount" class="form-control" value="<%= @ingredient.amount %>">
+  </div>
+  <!-- Label and input for name -->
+  <div class="form-group">
+    <label for="units">
+      Units
+    </label>
+
+    <input type="text" id="units" name="units" class="form-control" value="<%= @ingredient.units %>">
+  </div>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update Ingredient
+  </button>
+</form>
