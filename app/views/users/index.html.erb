@@ -1,0 +1,13 @@
+<% current_user.recipes.each do |recipe| %>
+  <div>
+    <h3>
+      <%= link_to recipe.name, recipe_path(recipe.id) %>
+    </h3>
+    <% recipe.ingredients.each do |i| %>
+    <p>
+      <%= i.name %> | <%= i.amount %> : <%= i.units %>
+    </p>
+    <% end %>
+  </div>
+  <hr>
+<% end %>
