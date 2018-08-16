@@ -1,0 +1,62 @@
+<h1>
+  Shoplist #<%= @shoplist.id %> details
+</h1>
+
+<a href="/shoplists/<%= @shoplist.id %>/edit">
+  Edit shoplist
+</a>
+
+<hr>
+
+<dl>
+  <dt>
+    Name
+  </dt>
+  <dd>
+    <%= @shoplist.name %>
+  </dd>
+
+  <dt>
+    Sum
+  </dt>
+  <dd>
+    <%= number_to_currency(@shoplist.sum) %>
+  </dd>
+
+  <dt>
+    Recipe
+  </dt>
+  <dd>
+    <%= link_to Recipe.find(@shoplist.recipe_id).name, recipe_path(@shoplist.recipe_id) %>
+  </dd>
+
+  <dt>
+    Created by
+  </dt>
+  <dd>
+    <%= link_to @shoplist.user.username, user_path(@shoplist.user) %> 
+  </dd>
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@shoplist.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@shoplist.updated_at) %> ago
+  </dd>
+</dl>
+
+<a href="/delete_shoplist/<%= @shoplist.id %>">
+  Delete shoplist
+</a>
+
+<hr>
+
+<a href="/shoplists">
+  Go back
+</a>

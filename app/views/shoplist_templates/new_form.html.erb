@@ -1,0 +1,80 @@
+<!-- Validation failure messages -->
+<% if @shoplist.present? %>
+  <% if @shoplist.errors.any? %>
+    <% @shoplist.errors.full_messages.each do |message| %>
+      <div class="alert alert-danger">
+        <%= message %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h1>
+  Make shoplist from recipe
+</h1>
+
+<hr>
+
+<form action="/create_shoplist" method="post">
+  <!-- Label and input for name -->
+  <div class="form-group">
+    <label for="name">
+      Shoplist Name
+    </label>
+    <input type="text" id="name" name="name" class="form-control" value="<%= @recipe.try(:name) %>">
+  </div>
+  <!-- Label and input for name -->
+  <div class="form-group">
+    <label for="i-name">
+      Ingredient Name
+    </label>
+
+    <input type="text" id="i-name" name="i-name" class="form-control" value="">
+  </div>
+
+  <!-- Label and input for amount -->
+  <div class="form-group">
+    <label for="amount">
+      Amount
+    </label>
+
+    <input type="text" id="amount" name="amount" class="form-control">
+  </div>
+
+  <!-- Label and input for units -->
+  <div class="form-group">
+    <label for="units">
+      Units
+    </label>
+
+    <input type="text" id="units" name="units" class="form-control" >
+  </div>
+  <!-- Label and input for units -->
+  <div class="form-group">
+    <label for="price">
+      Price
+    </label>
+
+    <input type="text" id="price" name="price" class="form-control" >
+  </div>
+
+
+
+  <!-- Label and input for recipe_id -->
+  <div class="form-group">
+
+    <input type="hidden" id="recipe_id" name="recipe_id" class="form-control" value="<%= @recipe.try(:id) %>">
+    <input type="hidden" id="user_id" name="user_id" class="form-control" value="<%= current_user.id %>">
+  </div>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create shoplist
+  </button>
+</form>
+
+<hr>
+
+<a href="/shoplists">
+  Go back
+</a>
