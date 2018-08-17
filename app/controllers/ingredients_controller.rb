@@ -41,11 +41,15 @@ class IngredientsController < ApplicationController
     @ingredient.name = params.fetch("name")
     @ingredient.units = params.fetch("units")
     @ingredient.amount = params.fetch("amount")
-
+    if @ingredient.shoplist_id
+      @ingredient.price = params.fetch('price')
+    end
     if @ingredient.valid?
       @ingredient.save
-
-      redirect_to("/ingredients/#{@ingredient.id}", :notice => "Ingredient updated successfully.")
+      #redirect to last page
+      # redirect_back fallback_location: shoplists_path, notice: "Ingredient updated successfully."
+      redirect_to shoplist_path(@ingredient.shoplist_id), notice: "Ingredient updated successfully."
+      # redirect_to("/ingredients/#{@ingredient.id}", :notice => "Ingredient updated successfully.")
     else
       render("ingredients/edit_form.html.erb")
     end

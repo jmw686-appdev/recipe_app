@@ -7,11 +7,11 @@ Rails.application.routes.draw do
 
   # READ
   get("/shoplists", { :controller => "shoplists", :action => "index" })
-  get("/shoplists/:id_to_display", { :controller => "shoplists", :action => "show" })
+  get("/shoplists/:id_to_display", { :controller => "shoplists", :action => "show", :as => 'shoplist' })
 
   # UPDATE
   get("/shoplists/:prefill_with_id/edit", { :controller => "shoplists", :action => "edit_form" })
-  post("/update_shoplist/:id_to_modify", { :controller => "shoplists", :action => "update_row" })
+  post("/update_shoplist/:id_to_modify", { :controller => "shoplists", :action => "update_row", :as => 'update_shoplist' })
 
   # DELETE
   get("/delete_shoplist/:id_to_remove", { :controller => "shoplists", :action => "destroy_row" })
@@ -42,7 +42,7 @@ Rails.application.routes.draw do
 
   # READ
   get("/ingredients", { :controller => "ingredients", :action => "index" })
-  get("/ingredients/:id_to_display", { :controller => "ingredients", :action => "show" })
+  get("/ingredients/:id_to_display", { :controller => "ingredients", :action => "show", :as => 'ingredient' })
 
   # UPDATE
   get("/ingredients/:prefill_with_id/edit", { :controller => "ingredients",

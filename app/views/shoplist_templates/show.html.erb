@@ -31,10 +31,20 @@
   </dd>
 
   <dt>
+    Ingredients
+  </dt>
+  <% Ingredient.where(shoplist_id: @shoplist.id).each do |i| %>
+    <dd>
+      <%= link_to i.name, edit_ingredient_path(i) %>
+      | &nbsp; <%= i.amount %> &nbsp; <%= i.units %>
+      | &nbsp; <%= number_to_currency(i.price) %>
+    </dd>
+  <% end %>
+  <dt>
     Created by
   </dt>
   <dd>
-    <%= link_to @shoplist.user.username, user_path(@shoplist.user) %> 
+    <%= link_to @shoplist.user.username, user_path(@shoplist.user) %>
   </dd>
   <dt>
     Created at
@@ -50,7 +60,7 @@
     <%= time_ago_in_words(@shoplist.updated_at) %> ago
   </dd>
 </dl>
-
+<%= render 'shoplist_templates/add_ingredient' %>
 <a href="/delete_shoplist/<%= @shoplist.id %>">
   Delete shoplist
 </a>
