@@ -1,0 +1,55 @@
+<hr>
+<h4>Add Ingredient</h4>
+<form action="<%= update_shoplist_path(@shoplist) %>" method="post">
+  <!-- Label and input for name -->
+  <div class="form-group">
+    <label for="name">
+      Name
+    </label>
+
+    <input type="text" id="name" name="name" class="form-control"
+        value="<%= @ingredient.try(:name) %>">
+  </div>
+
+  <!-- Label and input for amount -->
+  <div class="form-group">
+    <label for="amount">
+      Amount
+    </label>
+
+    <input type="text" id="amount" name="amount" class="form-control"
+          value="<%= @ingredient.try(:amount) %>">
+  </div>
+
+  <!-- Label and input for units -->
+  <div class="form-group">
+    <label for="units">
+      Units
+    </label>
+
+    <input type="text" id="units" name="units" class="form-control"
+          value="<%= @ingredient.try(:units) %>">
+  </div>
+  <!-- Label and input for units -->
+  <div class="form-group">
+    <label for="price">
+      Price
+    </label>
+
+    <input type="text" id="price" name="price" class="form-control"
+          value="<%= @ingredient.try(:price) %>">
+  </div>
+
+  <input type="hidden" id="recipe_id" name="recipe_id" class="form-control"
+          value="<%= @recipe.try(:id) %>">
+
+  <input type="hidden" id="shoplist_id" name="shoplist_id" class="form-control"
+          value="<%= @shoplist.try(:id) %>">
+
+  <input type="hidden" id="user_id" name="user_id" class="form-control"
+          value="<%= @recipe.try(:user_id) %>">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <button class="btn btn-block btn-outline-secondary">
+    Create ingredient
+  </button>
+</form>
