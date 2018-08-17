@@ -50,7 +50,7 @@ Rails.application.routes.draw do
   post("/update_ingredient/:id_to_modify", { :controller => "ingredients", :action => "update_row" })
 
   # DELETE
-  get("/delete_ingredient/:id_to_remove", { :controller => "ingredients", :action => "destroy_row" })
+  get("/delete_ingredient/:id_to_remove", { :controller => "ingredients", :action => "destroy_row", :as => 'delete_ingredient' })
 
   #------------------------------
 

@@ -19,20 +19,33 @@ class ShoplistsController < ApplicationController
   def create_row
     @shoplist = Shoplist.new
     @ingredient = Ingredient.new
-    
+    @recipe = Recipe.find(params.fetch('recipe_id'))
+    ingredients = Ingredient.where(recipe_id: @recipe.id)
+
     @shoplist.name = params.fetch("name")
-    @ingredient.name = params.fetch("i-name")
-    @ingredient.amount = params.fetch("amount")
-    @ingredient.units = params.fetch("units")
-    @ingredient.price = params.fetch("price")
-    @shoplist.sum = @ingredient.price
+    # @ingredient.name = params.fetch("i-name")
+    # @ingredient.amount = params.fetch("amount")
+    # @ingredient.units = params.fetch("units")
+    # @ingredient.price = params.fetch("price")
+    # @shoplist.sum = @ingredient.price
+    @shoplist.sum = 0
     @shoplist.recipe_id = params.fetch("recipe_id")
     @shoplist.user_id = params.fetch("user_id")
 
     if @shoplist.valid?
       @shoplist.save
-      @ingredient.shoplist_id = @shoplist.id
-      @ingredient.save
+      ingredients.each do |i|
+        # ig = Ingredient.new
+        # ig.name = i.name
+        # ig.amount = i.amount
+        # ig.units = i.units
+        # ig.price = i.price
+        i.shoplist_id = @shoplist.id
+        i.recipe_id = @shoplist.recipe_id
+        i.save
+      end
+      # @ingredient.shoplist_id = @shoplist.id
+      # @ingredient.save
       redirect_to("/shoplists", :notice => "Shoplist created successfully.")
     else
       render("shoplist_templates/new_form.html.erb")
@@ -65,7 +78,10 @@ class ShoplistsController < ApplicationController
 
   def destroy_row
     @shoplist = Shoplist.find(params.fetch("id_to_remove"))
-
+    @shoplist.ingredients.each do |i|
+      i.shoplist_id = nil
+      i.save
+    end
     @shoplist.destroy
 
     redirect_to("/shoplists", :notice => "Shoplist deleted successfully.")

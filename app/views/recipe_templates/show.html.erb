@@ -29,6 +29,7 @@
          <%= ingr.amount %> - <%= ingr.units %>
          <br>
          <%= link_to "Edit #{ingr.name}", edit_ingredient_path(ingr) %>
+         <%= link_to 'X', delete_ingredient_path(ingr) %>
          <br>
       </div>
       <hr>
